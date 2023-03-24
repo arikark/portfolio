@@ -1,5 +1,4 @@
 import "~/styles/globals.css"
-import TabsLayout from "./components/layouts/TabLayout.tsx"
 
 export default function RootLayout({
   children,
@@ -11,7 +10,9 @@ export default function RootLayout({
       <head />
       <body>
         {/* <TabsLayout>{children}</TabsLayout> */}
-        {children}
+        <div className="bg-gradient-to-t from-slate-900 via-blue-900 to-blue-800">
+          {children}
+        </div>
       </body>
     </html>
   )
