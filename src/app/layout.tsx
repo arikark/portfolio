@@ -1,16 +1,18 @@
-import type { AppProps } from "next/app";
-
-import "~/styles/globals.css";
+import "~/styles/globals.css"
+import TabsLayout from "./components/layouts/TabLayout.tsx"
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html>
       <head />
-      <body>{children}</body>
+      <body>
+        {/* <TabsLayout>{children}</TabsLayout> */}
+        {children}
+      </body>
     </html>
-  );
+  )
 }
