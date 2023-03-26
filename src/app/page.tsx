@@ -1,45 +1,45 @@
 import {} from "tailwindcss"
 
 import AboutMe from "./AboutMe"
+import { type Tab } from "./components/layouts/TabLayout"
+import ScrollNavigator from "./components/ScrollNavigator"
 import EducationWorkExperience from "./EducationWorkExperience"
-import Landing from "./Landing"
+import Home from "./Home"
 import Testimonials from "./Testimonials"
 
-type Page = {
-  label: string
-  href: string
-  component: () => JSX.Element
-}
-
-const pages: Page[] = [
+const pages: Tab[] = [
+  {
+    label: "Home",
+    value: "home",
+    children: <Home />,
+  },
   {
     label: "About me",
-    href: "/about-me",
-    component: () => <Landing />,
+    value: "about-me",
+    children: <AboutMe />,
   },
   {
-    label: "Feedback",
-    href: "/feedback",
-    component: () => <AboutMe />,
+    label: "Testimonials",
+    value: "testimonials",
+    children: <Testimonials />,
   },
   {
-    label: "Other",
-    href: "/other",
-    component: () => <Testimonials />,
-  },
-  {
-    label: "Other",
-    href: "/other",
-    component: () => <EducationWorkExperience />,
+    label: "Education and Work Experience",
+    value: "education-and-work-experience",
+    children: <EducationWorkExperience />,
   },
 ]
 
 export default function Page() {
   return (
     <div className="h-screen snap-y snap-mandatory overflow-scroll scroll-smooth">
-      {pages.map(({ component, label }) => (
-        <div key={label} className="flex h-screen w-screen snap-start text-8xl">
-          {component()}
+      {pages.map(({ label, children, value }) => (
+        <div
+          key={label}
+          className="flex h-screen w-screen snap-start p-4"
+          id={value}
+        >
+          <ScrollNavigator hashPath={value}>{children}</ScrollNavigator>
         </div>
       ))}
     </div>

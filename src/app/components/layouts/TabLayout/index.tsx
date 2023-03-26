@@ -1,28 +1,18 @@
 "use client"
 
+import { type ReactNode } from "react"
 import * as Tabs from "@radix-ui/react-tabs"
 import Link from "next/link"
 
-const tabs = [
-  {
-    label: "About me",
-    href: "/about-me",
-    value: "tab1",
-  },
-  {
-    label: "Feedback",
-    href: "/feedback",
-    value: "tab2",
-  },
-]
+export type Tab = {
+  label: string
+  value: string
+  children: ReactNode
+}
 
-export default function TabsLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function TabsLayout({ tabs }: { tabs: Tab[] }) {
   const pathName = window.location.pathname
-  const defaultTab = tabs.find((tab) => tab.href === pathName)
+  const defaultTab = tabs.find((tab) => tab.value === pathName)
   return (
     <Tabs.Root
       defaultValue={defaultTab?.value}
@@ -32,8 +22,8 @@ export default function TabsLayout({
         aria-label="tabs"
         className="sticky top-0 z-50 ml-4 flex flex-col gap-1 sm:ml-0 sm:flex-row sm:justify-end"
       >
-        {tabs.map(({ href, value, label }) => (
-          <Link href={href} key={value}>
+        {tabs.map(({ value, label }) => (
+          <Link href={value} key={value}>
             <Tabs.Trigger
               value={value}
               className="d data-[state=active]:text-white, whitespace-nowrap px-3 py-2 font-mono text-sm font-medium  underline-offset-2 hover:text-green-400 data-[state=active]:underline"
@@ -42,11 +32,15 @@ export default function TabsLayout({
             </Tabs.Trigger>
           </Link>
         ))}
-        <Tabs.List />
       </Tabs.List>
-      {tabs.map(({ value }) => (
+      {tabs.map(({ value, children }) => (
         <Tabs.Content value={value} key={value}>
-          {children}
+          <div
+            key={value}
+            className="flex h-screen snap-start overflow-x-hidden p-6 text-8xl"
+          >
+            {children}
+          </div>
         </Tabs.Content>
       ))}
     </Tabs.Root>
