@@ -1,5 +1,3 @@
-import {} from "tailwindcss"
-
 import AboutMe from "./AboutMe"
 import { type Tab } from "./components/layouts/TabLayout"
 import ScrollNavigator from "./components/ScrollNavigator"
@@ -36,7 +34,7 @@ export default function Page() {
       {pages.map(({ label, children, value }) => (
         <div
           key={label}
-          className="flex h-screen w-screen snap-start p-4"
+          className="flex h-screen w-screen snap-start p-10"
           id={value}
         >
           <ScrollNavigator hashPath={value}>{children}</ScrollNavigator>
